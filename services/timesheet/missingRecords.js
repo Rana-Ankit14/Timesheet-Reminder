@@ -1,5 +1,7 @@
 const moment = require('moment');
-const checkPresence = ( timesheetRecords, id ) => {
+const { DAILY_KEYWORD,INDEX_0, SATURDAY, SUNDAY } = require('../../constants')
+ 
+const checkPresenceOfUser = ( timesheetRecords, id ) => {
     for( let i=0; i< timesheetRecords.length; i++ ){
         if( timesheetRecords[i].user == id ){
             return true;
@@ -10,7 +12,7 @@ const checkPresence = ( timesheetRecords, id ) => {
 const getEmptyTimesheetUsers = ( timesheetRecords,userRecords ) => {
     let missingRecords = [];
     userRecords.forEach( user => {
-        if( checkPresence(  timesheetRecords, user.id  ) === false  ){                       
+        if( checkPresenceOfUser(  timesheetRecords, user.id  ) === false  ){                       
             missingRecords.push( user.username );            
             return;
         }
@@ -20,10 +22,10 @@ const getEmptyTimesheetUsers = ( timesheetRecords,userRecords ) => {
 exports.getMissingRecords = (timesheetRecords, userRecords, days) => {
     const date = moment();
     let result = [];
-    if (days === 1) {
+    if (days === DAILY_KEYWORD ) {
         result = getEmptyTimesheetUsers(timesheetRecords, userRecords);
         result.sort((a, b) => {
-            return a[0] - b[0];
+            return a[ INDEX_0 ] - b[ INDEX_0 ];
         });
         result.unshift(date.format('DD-MMMM-YYYY'));
         result = [ result ];
@@ -33,7 +35,7 @@ exports.getMissingRecords = (timesheetRecords, userRecords, days) => {
     for (let i = 1; i <= days; i++) {
         date.subtract(1, 'days');
         let day = date.day();
-        let isWeekend = (day === 6) || (day === 0);
+        let isWeekend = (day === SATURDAY ) || (day === SUNDAY);
 
         if( isWeekend == false ) { 
 
@@ -44,7 +46,7 @@ exports.getMissingRecords = (timesheetRecords, userRecords, days) => {
             let currentMissingRecords = getEmptyTimesheetUsers(currentTimesheetRecords, userRecords);
 
             currentMissingRecords.sort((a, b) => {
-                return a[0] - b[0]
+                return a[ INDEX_0 ] - b[ INDEX_0 ]
             });
 
             currentMissingRecords.unshift(date.format('DD-MMMM-YYYY'))

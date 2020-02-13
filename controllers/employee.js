@@ -3,6 +3,7 @@ const getTotalNoOfHours   = require('../services/employee/countWorkingHours');
 const stringConverterHelper = require('../utils/stringConverterHelper');
 const { body } = require('express-validator/check')
 const { validationResult } = require('express-validator/check');
+const { INDEX_0, INDEX_1 } = require('../constants');
 
 exports.validate = ( method ) => {    
     switch (method) {
@@ -26,8 +27,7 @@ exports.countWorkingHours = async ( req,res ) => {
     const timesheetRecordsPromise = getRecords.getTimeSheetRecords(command);
     const userRecordsPromise      = getRecords.getUsers(); 
     const records = await Promise.all([timesheetRecordsPromise, userRecordsPromise]);
-    let result    = await getTotalNoOfHours.getTotalNoOfHours(JSON.parse(records[0]),JSON.parse(records[1]));
-    
+    let result    = await getTotalNoOfHours.getTotalNoOfHours(JSON.parse(records[ INDEX_0 ]),JSON.parse(records[ INDEX_1 ]));    
     const stringResult =  stringConverterHelper.getWorkingHoursIntoString(result);
     res.send(stringResult);
 }

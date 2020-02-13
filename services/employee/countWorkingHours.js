@@ -1,25 +1,25 @@
-const Constants  = require('../../constants');
 const hashmap    = require('hashmap');
+const { INDEX_0, INDEX_1,INITIAL_HOURS,HOUR_INDEX } = require('../../constants')
 
-const getUserMap = (userRecords) => {
+const initialiseUserMap = (userRecords) => {
     let map = new hashmap();
     userRecords.forEach( user => {
         let userdata = [];
         userdata.push(user.username);
-        userdata.push(0);        
+        userdata.push( INITIAL_HOURS );        
         map.set(user.id,userdata);
     });
     return map;
 }
 
 exports.getTotalNoOfHours = (timesheetRecords, userRecords) => {
-    let userMap = getUserMap(userRecords);  
+    let userMap = initialiseUserMap(userRecords);  
     
     timesheetRecords.forEach( record  => {
         let userdata = userMap.get(record.user);
-        let prevHours = parseFloat(userdata[1]); 
+        let prevHours = parseFloat(userdata[ INDEX_1 ]); 
         let currentHours = record.duration / 3600;
-        userdata[ Constants.HOUR_INDEX ] = (prevHours + currentHours).toPrecision(3);
+        userdata[ HOUR_INDEX ] = (prevHours + currentHours).toPrecision(3);
         userMap.set(record.user,userdata);
     });    
 
@@ -27,8 +27,8 @@ exports.getTotalNoOfHours = (timesheetRecords, userRecords) => {
     userMap.forEach( user => {
         result.push(
           { 
-            'username':user[0],
-            'totalhours':user[1] 
+            'username':user[ INDEX_0  ],
+            'totalhours':user[ INDEX_1 ] 
           } 
         ) 
     });

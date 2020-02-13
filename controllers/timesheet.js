@@ -5,6 +5,7 @@ const stringConverterHelper = require('../utils/stringConverterHelper');
 const getTimeOfCommand      = require('../utils/getTimeOfCommand');
 const { body } = require('express-validator/check');
 const { validationResult } = require('express-validator/check');
+const { INDEX_0, INDEX_1 } = require('../constants')
 
 exports.validate = ( method ) => {    
     switch (method) {
@@ -33,7 +34,7 @@ exports.getTimesheetMissingDescription = async ( req,res ) => {
     const timesheetRecordsPromise = getRecords.getTimeSheetRecords(command);
     const userRecordsPromise      = getRecords.getUsers(); 
     const records = await Promise.all([timesheetRecordsPromise, userRecordsPromise]);
-    let result    = await emptyDescriptionService.getEmptyDescriptionUsers(JSON.parse(records[0]),JSON.parse(records[1]));
+    let result    = await emptyDescriptionService.getEmptyDescriptionUsers(JSON.parse(records[ INDEX_0 ]),JSON.parse(records[ INDEX_1 ]));
     const stringResult = stringConverterHelper.getMissingDescriptionIntoString(result);
     res.send(stringResult);
 }
@@ -50,7 +51,7 @@ exports.getTimesheetMissingRecords = async ( req,res ) => {
     const timesheetRecordsPromise = getRecords.getTimeSheetRecords(command);
     const userRecordsPromise      = getRecords.getUsers(); 
     const records = await Promise.all([timesheetRecordsPromise, userRecordsPromise]);
-    let result    = await missingRecordsService.getMissingRecords(JSON.parse(records[0]),JSON.parse(records[1]), days );
+    let result    = await missingRecordsService.getMissingRecords(JSON.parse(records[ INDEX_0 ]),JSON.parse(records[ INDEX_1 ]), days );
     const stringResult = stringConverterHelper.getMissingRecordsIntoString(result);
     res.send(stringResult);
 }
