@@ -10,7 +10,6 @@ exports.sendSlackReminder = ( text,channel ) => {
         url: process.env.slackPostMessageURL,
         headers: {
              'content-type': 'application/x-www-form-urlencoded',
-             'postman-token': '5306ad3b-1cb6-80bb-7094-206f0619970d',
              'cache-control': 'no-cache',
               accept: 'application/json' 
         },

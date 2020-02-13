@@ -9,7 +9,6 @@ let options = {
   method: 'GET',
   headers: 
   { 
-      'postman-token': 'a4cc6340-5a7d-fade-9b48-6f44094e86ae',
       'cache-control': 'no-cache',
       'x-auth-token': xauthtoken,
       'x-auth-user': xauthuser 
