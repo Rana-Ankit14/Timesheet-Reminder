@@ -3,7 +3,7 @@ const getTotalNoOfHours   = require('../services/employee/countWorkingHours');
 const stringConverterHelper = require('../utils/stringConverterHelper');
 const { body } = require('express-validator/check')
 const { validationResult } = require('express-validator/check');
-const { INDEX_0, INDEX_1 } = require('../constants');
+const { INDEX_0, INDEX_1,UNPROCESSABLE_ENTITY } = require('../constants');
 
 exports.validate = ( method ) => {    
     switch (method) {
@@ -18,7 +18,7 @@ exports.validate = ( method ) => {
 exports.countWorkingHours = async ( req,res ) => {
     const errors = validationResult(req); 
     if (!errors.isEmpty()) {
-        res.status(422).json({ errors: errors.array() });
+        res.status(UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
         return;
     }
 

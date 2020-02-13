@@ -32,7 +32,7 @@ exports.getMissingRecords = (timesheetRecords, userRecords, days) => {
         return result;
     }
 
-    for (let i = 1; i <= days; i++) {
+    for (let dayIndex = 1; dayIndex <= days; dayIndex++) {
         date.subtract(1, 'days');
         let day = date.day();
         let isWeekend = (day === SATURDAY ) || (day === SUNDAY);

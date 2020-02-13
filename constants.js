@@ -7,5 +7,6 @@ module.exports = {
 	INDEX_1       : 1,
 	INITIAL_HOURS : 0,
 	SATURDAY      : 6,
-	SUNDAY        : 0
+	SUNDAY        : 0,
+	UNPROCESSABLE_ENTITY : 422 
 }
