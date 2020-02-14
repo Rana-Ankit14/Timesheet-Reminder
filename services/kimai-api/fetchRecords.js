@@ -2,8 +2,8 @@ const request = require("request");
 const getDates     = require('../../utils/getDates')
 require('dotenv').config()
 
-const xauthtoken = process.env.xauthtoken;
-const xauthuser  = process.env.xauthuser;    
+const xauthtoken = process.env.X_AUTH_TOKEN;
+const xauthuser  = process.env.X_AUTH_USER;    
 
 let options = { 
     method: 'GET',
@@ -25,14 +25,14 @@ const performRequest = (options) => {
 }
   
 exports.getUsers = async () => {
-    options.url = process.env.userRecordsURL;
+    options.url = process.env.USER_RECORDS_URL;
     let result =  performRequest(options);    
     return result;      
 }
 
 exports.getTimeSheetRecords = async (command) => {
     const Dates = getDates.getDates(command);
-    options.url = process.env.timesheetRecordsURL;
+    options.url = process.env.TIMESHEET_RECORDS_URL;
     options.qs  = {
         begin: Dates.beginDate,
         end : Dates.endDate 

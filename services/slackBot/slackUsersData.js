@@ -13,9 +13,9 @@ exports.getSlackUsersData = ( userRecords ) => {
 
     let options = {
         method: 'GET',
-        url: process.env.slackUsersListURL,
+        url: process.env.SLACK_USERS_LIST_URL,
         qs: { 
-            token: process.env.slackBotToken
+            token: process.env.SLACK_BOT_TOKEN
         },
         headers: { 
             'cache-control': 'no-cache' 
