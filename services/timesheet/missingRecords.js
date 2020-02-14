@@ -27,6 +27,7 @@ exports.getMissingRecords = (timesheetRecords, userRecords, days) => {
         result.sort((a, b) => {
             return a[ INDEX_0 ] - b[ INDEX_0 ];
         });
+        date.subtract(1,'day');
         result.unshift(date.format('DD-MMMM-YYYY'));
         result = [ result ];
         return result;
@@ -52,6 +53,7 @@ exports.getMissingRecords = (timesheetRecords, userRecords, days) => {
             currentMissingRecords.unshift(date.format('DD-MMMM-YYYY'))
             result.push(currentMissingRecords);
         }
+        
     }
     return result;
 }

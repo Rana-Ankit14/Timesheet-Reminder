@@ -6,23 +6,23 @@ const xauthtoken = process.env.xauthtoken;
 const xauthuser  = process.env.xauthuser;    
 
 let options = { 
-  method: 'GET',
-  headers: 
-  { 
-      'cache-control': 'no-cache',
-      'x-auth-token': xauthtoken,
-      'x-auth-user': xauthuser 
-  }
+    method: 'GET',
+    headers: 
+    { 
+        'cache-control': 'no-cache',
+        'x-auth-token': xauthtoken,
+        'x-auth-user': xauthuser 
+    }
 };
 
 const performRequest = (options) => {
-    return new Promise((resolve, reject)=>{
-      request(options,(error, response, body) => {
-        if (error) throw new Error(error);   
-        resolve(body);
-      });     
+    return new Promise((resolve, reject) => {
+        request(options,(error, response, body) => {
+            if (error) throw new Error(error);   
+            resolve(body);
+        });     
     });
-  }
+}
   
 exports.getUsers = async () => {
     options.url = process.env.userRecordsURL;
@@ -32,6 +32,7 @@ exports.getUsers = async () => {
 
 exports.getTimeSheetRecords = async (command) => {
     const Dates = getDates.getDates(command);
+    
     options.url = process.env.timesheetRecordsURL;
     options.qs  = {
         begin: Dates.begindate,
