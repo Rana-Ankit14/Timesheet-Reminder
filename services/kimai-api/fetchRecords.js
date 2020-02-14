@@ -32,12 +32,11 @@ exports.getUsers = async () => {
 
 exports.getTimeSheetRecords = async (command) => {
     const Dates = getDates.getDates(command);
-    
     options.url = process.env.timesheetRecordsURL;
     options.qs  = {
-        begin: Dates.begindate,
-        end : Dates.enddate 
+        begin: Dates.beginDate,
+        end : Dates.endDate 
     }    
-    let result =  performRequest(options);    
+    let result =  await performRequest(options);    
     return result;
 }
