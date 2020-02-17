@@ -64,7 +64,6 @@ The admin of time-tracking system can easily list down users using SLASH COMMAND
       
   # Team
     https://www.linkedin.com/in/shadabshaikh0/    
-    https://www.linkedin.com/in/rana-ankit-singh-05028a169/
-    https://www.linkedin.com/in/yashveer-bhadouria-1b4805129/
-
+    https://www.linkedin.com/in/rana-ankit-singh/
+    https://www.linkedin.com/in/yashveer-bhadouria/
   
