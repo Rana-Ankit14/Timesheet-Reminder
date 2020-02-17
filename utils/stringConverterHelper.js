@@ -1,4 +1,4 @@
-exports.getWorkingHoursIntoString = ( result ) => {
+exports.getWorkingHoursIntoString = ( result ) => {    
     let stringResult = "";
     result.forEach( user => {
         stringResult = stringResult + user.username + "  - " + user.totalhours + " Hr\n";
